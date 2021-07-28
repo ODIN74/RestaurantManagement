@@ -9,7 +9,7 @@ namespace RestaurantManagement.Models.Users
     public class UserCreateModel
     {
         [Required]
-        [Display(Name = "Имя пользователя(Ник)")]
+        [Display(Name = "Имя пользователя")]
         public string Name { get; set; }
 
         [Required]

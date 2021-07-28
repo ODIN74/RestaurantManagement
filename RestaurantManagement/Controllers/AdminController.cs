@@ -31,10 +31,10 @@ namespace RestaurantManagement.Controllers
             return View();
         }
 
-        // GET: AdminController/Create
-        public ActionResult Create()
+        [HttpPost]
+        public ActionResult Create(string name, string email, string password)
         {
-            return View();
+            if(name == String.Empty || email == String.Empty || password = String.Empty) return View();
         }
 
         // POST: AdminController/Create
