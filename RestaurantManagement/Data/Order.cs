@@ -16,13 +16,13 @@ namespace RestaurantManagement.Data
     {
         public int Id { get; set; }
 
-        public string TableId { get; set; }
+        public Tables Table { get; set; }
 
-        public string WaiterId { get; set; }
+        public IdentityUser Waiter { get; set; }
 
         public DateTime OrderTime { get; set; }
 
-        public string DishIdList { get; set; }
+        public List<Dishes> Dishes { get; set; }
 
         public float TotalCost { get; set; }
 

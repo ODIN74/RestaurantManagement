@@ -11,8 +11,7 @@ namespace RestaurantManagement.Data
     {
         public int id { get; set; }
 
-        [Key]
-        public string UserId { get; set; }
+        public IdentityUser User { get; set; }
 
         [StringLength(30)]
         public string FirstName { get; set; }

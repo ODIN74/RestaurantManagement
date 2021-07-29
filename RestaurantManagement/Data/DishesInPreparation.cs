@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,11 +11,9 @@ namespace RestaurantManagement.Data
     { 
         public int Id { get; set; }
 
-        [Key]
-        public int DishId { get; set; }
+        public Dishes Dish { get; set; }
 
-        [Key]
-        public string CookId { get; set; }
+        public IdentityUser Cook { get; set; }
 
         public DateTime OrderTime { get; set; }
 

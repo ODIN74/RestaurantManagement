@@ -12,10 +12,6 @@ namespace RestaurantManagement.Data
 
         public string Name { get; set; }
 
-        public string IngredientsId { get; set; }
-
-        public string IngredientsWeight { get; set; }
-
         public bool IsRequiritPraeparationem { get; set; }
 
         public int CookingTimeInMinutes { get; set; }

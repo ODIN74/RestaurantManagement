@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace RestaurantManagement.Data
 {
@@ -25,5 +26,21 @@ namespace RestaurantManagement.Data
         public DbSet<Price> Price { get; set; }
 
         public DbSet<Order> Orders { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<IngredientsWeights>().HasOne(d => d.Ingredient).WithMany();
+            modelBuilder.Entity<IngredientsWeights>().HasOne(d => d.Dish).WithMany();
+            modelBuilder.Entity<Order>().HasMany<Dishes>(o => o.Dishes).WithOne();
+            modelBuilder.Entity<Order>().HasOne(o => o.Waiter).WithMany();
+            modelBuilder.Entity<Order>().HasOne(o => o.Table).WithMany();
+            modelBuilder.Entity<Price>().HasOne(d => d.Dish).WithMany();
+            modelBuilder.Entity<DishesInPreparation>().HasOne(d => d.Dish).WithMany();
+            modelBuilder.Entity<AdditionalUserInformation>().HasOne(c => c.User);
+            modelBuilder.Entity<DishesInPreparation>().HasOne(c => c.Cook).WithMany();
+            modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(l => l.UserId);
+            modelBuilder.Entity<IdentityUserRole<string>>().HasKey(r => r.RoleId);
+            modelBuilder.Entity<IdentityUserToken<string>>().HasKey(t => t.UserId);
+        }
     }
 }
