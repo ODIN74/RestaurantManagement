@@ -6,132 +6,78 @@
 }
 
 <div class="card bg-default shadow">
-<div class="card-header bg-transparent border-0">
-    <h3 class="text-white mb-0">Пользователи</h3>
-</div>
+    <div class="card-header bg-transparent border-0">
+        <h3 class="text-white mb-0">Пользователи</h3>
+    </div>
 <div>
-    <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#modal-form">
+    <div id="PlaceHolder"></div>
+    <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="ajax-modal" data-target="#userCreate" data-url="@Url.Action("Create")">
         <span class="btn-inner--icon"><i class="ni ni-single-02"></i></span>
         <span class="btn-inner--text">Создать пользователя</span>
     </button>
-    <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-        <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-body p-0">
-                    <div class="card bg-secondary border-0 mb-0">
-                        <div class="card-header bg-transparent pb-5">
-                            <div class="card-body px-lg-5 py-lg-5">
-                                <div class="text-center text-muted mb-4">
-                                    <small>Создать пользователя</small>
-                                </div>
-                                <form asp-controller="Admin" asp-action="Create" method="post" role="form">
-                                    <div class="form-group mb-3">
-                                        <div class="input-group input-group-merge input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="ni ni-single-02"></i></span>
-                                            </div>
-                                            <input class="form-control" placeholder="Name" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <div class="input-group input-group-merge input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                                            </div>
-                                            <input class="form-control" placeholder="Email" type="email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group input-group-merge input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                                            </div>
-                                            <input class="form-control" placeholder="Password" type="password">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group input-group-merge input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                                            </div>
-                                            <input class="form-control" placeholder="ConfirmPassword" type="password">
-                                        </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary my-4">Создать</button>
-                                        <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Отменить</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="table-responsive">
-    <table class="table align-items-center table-flush">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col" class="align-items-center" data-sort="id">ID</th>
-            <th scope="col" class="align-items-center" data-sort="name">Имя пользователя</th>
-            <th scope="col" class="align-items-center" data-sort="email">E-mail</th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
-        <tbody class="list">
-        @if (!Model.Any())
-        {
-            <tr><td colspan="4" class="text-white align-items-center">Нет зарегистрированных пользователей</td></tr>
-        }
-        else
-        {
-            @foreach (IdentityUser user in Model)
+        <table class="table align-items-center table-flush">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" class="align-items-center" data-sort="id">ID</th>
+                <th scope="col" class="align-items-center" data-sort="name">Имя пользователя</th>
+                <th scope="col" class="align-items-center" data-sort="email">E-mail</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody class="list">
+            @if (!Model.Any())
             {
-                <tr>
-                    <td class="text-white align-items-center">@user.Id</td>
-                    <td class="text-white align-items-center">@user.UserName</td>
-                    <td class="text-white align-items-center">@user.Email</td>
-                    <td class="text-right">
-                        <div class="dropdown">
-                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                <a class="dropdown-item" asp-controller="Admin" asp-action="Edit">Изменить</a>
-                                <a class="dropdown-item" asp-controller="Admin" asp-action="Delete">Удалить</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+                <tr><td colspan="4" class="text-white align-items-center">Нет зарегистрированных пользователей</td></tr>
             }
-        }
-        </tbody>
-    </table>
-</div>
-<div class="card-footer py-4">
-    <nav aria-label="...">
-        <ul class="pagination justify-content-end mb-0">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">
-                    <i class="fas fa-angle-left"></i>
-                    <span class="sr-only">Previous</span>
-                </a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">
-                    <i class="fas fa-angle-right"></i>
-                    <span class="sr-only">Next</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
+            else
+            {
+                @foreach (IdentityUser user in Model)
+                {
+                    <tr>
+                        <td class="text-white align-items-center">@user.Id</td>
+                        <td class="text-white align-items-center">@user.UserName</td>
+                        <td class="text-white align-items-center">@user.Email</td>
+                        <td class="text-right">
+                            <div class="dropdown">
+                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <a class="dropdown-item" asp-controller="Admin" asp-action="Edit">Изменить</a>
+                                    <a class="dropdown-item" asp-controller="Admin" asp-action="Delete">Удалить</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer py-4">
+        <nav aria-label="...">
+            <ul class="pagination justify-content-end mb-0">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">
+                        <i class="fas fa-angle-left"></i>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">
+                        <i class="fas fa-angle-right"></i>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </div>

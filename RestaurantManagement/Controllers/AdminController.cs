@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using RestaurantManagement.Models.Users;
 
 namespace RestaurantManagement.Controllers
 {
@@ -31,25 +33,23 @@ namespace RestaurantManagement.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Create(string name, string email, string password)
+        [HttpGet]
+        public IActionResult Create()
         {
-            if(name == String.Empty || email == String.Empty || password = String.Empty) return View();
+            var newUser = new UserCreateModel();
+
+            return PartialView("_UserCreatePartial", newUser);
         }
 
-        // POST: AdminController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Create(UserCreateModel user)
         {
-            try
+            var newUser = new IdentityUser()
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                UserName = user.Name,
+                Email = user.Email
+            };
+            return RedirectToAction("Index");
         }
 
         // GET: AdminController/Edit/5
