@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace RestaurantManagement.Data
 {
-    public class Ingredients
+    public class MenuCategory
     {
         public int Id { get; set; }
 
         [Required]
-        [StringLength(100)]
         public string Name { get; set; }
-
-        [StringLength(15)]
-        public string UnitOfMeasurement { get; set; }
     }
 }

@@ -11,10 +11,12 @@ namespace RestaurantManagement.Data
     { 
         public int Id { get; set; }
 
+        [Required]
         public Dishes Dish { get; set; }
 
         public IdentityUser Cook { get; set; }
 
+        [Required]
         public DateTime OrderTime { get; set; }
 
         public DateTime ReadyTime { get; set; }

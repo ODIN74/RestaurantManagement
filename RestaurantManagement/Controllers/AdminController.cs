@@ -6,17 +6,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using RestaurantManagement.Data;
 using RestaurantManagement.Models.Users;
 
 namespace RestaurantManagement.Controllers
 {
     public class AdminController : Controller
     {
-        private UserManager<IdentityUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly ApplicationDbContext _context;
 
-        public AdminController(UserManager<IdentityUser> userManager)
+        public AdminController(UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
+            _context = context;
         }
 
         // GET: AdminController
@@ -42,14 +45,24 @@ namespace RestaurantManagement.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(UserCreateModel user)
+        public async Task<IActionResult> Create(UserCreateModel user)
         {
-            var newUser = new IdentityUser()
-            {
-                UserName = user.Name,
-                Email = user.Email
-            };
-            return RedirectToAction("Index");
+                var newUser = new IdentityUser()
+                {
+                    UserName = user.Name,
+                    Email = user.Email
+                };
+
+                await _userManager.CreateAsync(newUser, user.Password);
+                IdentityUser createdUser = await _userManager.FindByEmailAsync(newUser.Email);
+                var newUserInfo = new AdditionalUserInformation()
+                {
+                    User = createdUser
+                };
+                await _context.AdditionalUserInformation.AddAsync(newUserInfo);
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
         }
 
         // GET: AdminController/Edit/5

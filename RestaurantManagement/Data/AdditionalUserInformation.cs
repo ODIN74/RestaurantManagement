@@ -11,6 +11,7 @@ namespace RestaurantManagement.Data
     {
         public int id { get; set; }
 
+        [Required]
         public IdentityUser User { get; set; }
 
         [StringLength(30)]
@@ -30,7 +31,8 @@ namespace RestaurantManagement.Data
 
         [StringLength(1000)]
         public string AboutMe { get; set; }
-
+        
+        [StringLength(1000)]
         public string PhotoUrl { get; set; }
     }
 }

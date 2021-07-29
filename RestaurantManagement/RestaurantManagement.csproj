@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20210729180315_AdditionalUserInformation.cs" />
+    <Compile Remove="Data\Migrations\20210729180315_AdditionalUserInformation.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210729180400_remove.cs" />
+    <Compile Remove="Data\Migrations\20210729180400_remove.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\vendor\gulp-copy\node_modules\yargs-parser\LICENSE.txt" />
     <Content Include="wwwroot\vendor\gulp-copy\node_modules\yargs\locales\be.json" />
     <Content Include="wwwroot\vendor\gulp-copy\node_modules\yargs\locales\de.json" />
