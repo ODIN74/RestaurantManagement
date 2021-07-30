@@ -286,3 +286,4 @@ D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netco
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Admin\IndexUsers.cshtml.g.cs
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Admin\IndexRoles.cshtml.g.cs
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_RoleCreatePartial.cshtml.g.cs
+D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditRole.cshtml.g.cs

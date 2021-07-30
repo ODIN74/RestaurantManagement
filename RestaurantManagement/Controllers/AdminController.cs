@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RestaurantManagement.Data;
+using RestaurantManagement.Models.Roles;
 using RestaurantManagement.Models.Users;
 
 namespace RestaurantManagement.Controllers
@@ -163,6 +164,33 @@ namespace RestaurantManagement.Controllers
             if (role != null)
             {
                 IdentityResult result = await _roleManager.CreateAsync(role);
+            }
+
+            return RedirectToAction("IndexRoles");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditRole(string id)
+        {
+            IdentityRole role = await _roleManager.FindByIdAsync(id);
+
+            var users = new Dictionary<IdentityUser, bool>();
+            if (role != null)
+            {
+                foreach (IdentityUser user in _userManager.Users)
+                {
+                    bool isInRole = await _userManager.IsInRoleAsync(user, role.NormalizedName);
+                    users.Add(user,isInRole);
+                }
+
+                var dataForEditing = new RoleEditModel()
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name,
+                    UsersInRoleStatus = users
+                };
+
+                return View(dataForEditing);
             }
 
             return RedirectToAction("IndexRoles");

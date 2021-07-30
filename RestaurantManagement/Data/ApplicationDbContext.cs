@@ -43,6 +43,7 @@ namespace RestaurantManagement.Data
             modelBuilder.Entity<IdentityUserToken<string>>().HasKey(t => t.UserId);
             modelBuilder.Entity<DishesInCatуgories>().HasOne(d => d.Dish);
             modelBuilder.Entity<DishesInCatуgories>().HasOne(c => c.Category);
+            modelBuilder.Entity<IdentityUserRole<string>>(b => b.HasKey(i => new {i.UserId, i.RoleId}));
         }
     }
 }

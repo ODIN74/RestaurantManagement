@@ -44,7 +44,9 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <button type="button" class="btn btn-secondary btn-lg btn-block" data-toggle="ajax-modal" data-target="#roleEdit" data-url="@Url.Action($"EditRole/{role.Id}")">Изменить</button>
+                                            <form asp-action="EditRole" asp-route-id="@role.Id" method="post">
+                                                <button type="submit" class="btn btn-secondary btn-lg btn-block">Изменить</button>
+                                            </form>
                                             <button type="button" class="btn btn-secondary btn-lg btn-block" data-toggle="ajax-modal" data-target="#roleDelete" data-url="@Url.Action($"DeleteRole/{role.Id}")">Удалить</button>
                                         </div>
                                     </div>
