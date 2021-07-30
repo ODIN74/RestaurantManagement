@@ -6,12 +6,12 @@
 }
 
 <div class="card bg-default shadow">
-    <div class="card-header bg-transparent border-0">
-        <h3 class="text-white mb-0">Пользователи</h3>
-    </div>
+<div class="card-header bg-transparent border-0">
+    <h3 class="text-white mb-0">Пользователи</h3>
+</div>
 <div>
     <div id="PlaceHolder"></div>
-    <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="ajax-modal" data-target="#userCreate" data-url="@Url.Action("Create")">
+    <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="ajax-modal" data-target="#userCreate" data-url="@Url.Action("CreateUser")">
         <span class="btn-inner--icon"><i class="ni ni-single-02"></i></span>
         <span class="btn-inner--text">Создать пользователя</span>
     </button>
@@ -44,8 +44,8 @@
                                     <i class="fas fa-ellipsis-v"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                    <a class="dropdown-item" asp-controller="Admin" asp-action="Edit">Изменить</a>
-                                    <a class="dropdown-item" asp-controller="Admin" asp-action="Delete">Удалить</a>
+                                    <button type="button" class="btn btn-secondary btn-lg btn-block" data-toggle="ajax-modal" data-target="#userEdit" data-url="@Url.Action($"EditUser/{user.Id}")">Изменить</button>
+                                    <button type="button" class="btn btn-secondary btn-lg btn-block" data-toggle="ajax-modal" data-target="#userDelete" data-url="@Url.Action($"DeleteUser/{user.Id}")">Удалить</button>
                                 </div>
                             </div>
                         </td>
@@ -80,4 +80,5 @@
             </ul>
         </nav>
     </div>
+</div>
 </div>

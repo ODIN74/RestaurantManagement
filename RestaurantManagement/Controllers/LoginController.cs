@@ -36,7 +36,7 @@ namespace RestaurantManagement.Controllers
                 if (user != null)
                 {
                     await _signInManager.SignOutAsync();
-                    SignInResult result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
+                    SignInResult result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
                     if (result.Succeeded)
                     {
                         return RedirectToAction("Index", "Home");

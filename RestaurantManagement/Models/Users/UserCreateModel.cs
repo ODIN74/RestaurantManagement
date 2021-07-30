@@ -21,10 +21,5 @@ namespace RestaurantManagement.Models.Users
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 
-        [Required]
-        [Compare(nameof(Password))]
-        [DataType(DataType.Password)]
-        [Display(Name = "Подтверждение пароля")]
-        public string ConfirmPassword { get; set; }
     }
 }

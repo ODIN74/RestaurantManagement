@@ -14,30 +14,27 @@ namespace RestaurantManagement.Controllers
     public class AdminController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _context;
 
-        public AdminController(UserManager<IdentityUser> userManager, ApplicationDbContext context)
+        public AdminController(UserManager<IdentityUser> userManager, ApplicationDbContext context, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _context = context;
+            _roleManager = roleManager;
         }
 
         // GET: AdminController
-        public ActionResult Index()
+        public IActionResult IndexUsers()
         {
-            var users = new List<IdentityUser>(); //_userManager.Users.ToList();
+            var users = _userManager.Users.ToList();
 
             return View(users);
         }
 
-        // GET: AdminController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult CreateUser()
         {
             var newUser = new UserCreateModel();
 
@@ -45,66 +42,130 @@ namespace RestaurantManagement.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(UserCreateModel user)
+        public async Task<IActionResult> CreateUser(UserCreateModel user)
         {
+            if (user != null)
+            {
                 var newUser = new IdentityUser()
                 {
                     UserName = user.Name,
-                    Email = user.Email
+                    Email = user.Email,
+                    EmailConfirmed = true
                 };
 
-                await _userManager.CreateAsync(newUser, user.Password);
-                IdentityUser createdUser = await _userManager.FindByEmailAsync(newUser.Email);
-                var newUserInfo = new AdditionalUserInformation()
+                IdentityResult result = await _userManager.CreateAsync(newUser, user.Password);
+
+                if (result.Succeeded)
                 {
-                    User = createdUser
-                };
-                await _context.AdditionalUserInformation.AddAsync(newUserInfo);
-                _context.SaveChanges();
+                    IdentityUser createdUser = await _userManager.FindByEmailAsync(newUser.Email);
+                    var newUserInfo = new AdditionalUserInformation()
+                    {
+                        User = createdUser
+                    };
+                    await _context.AdditionalUserInformation.AddAsync(newUserInfo);
+                    _context.SaveChanges();
+                }
+            }
 
-                return RedirectToAction("Index");
+            return RedirectToAction("IndexUsers");
         }
 
-        // GET: AdminController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: AdminController/EditUser/5
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
         {
-            return View();
+
+            IdentityUser user = await _userManager.FindByIdAsync(id);
+            var userForEdit = new UserEditModel();
+            if (user != null)
+            {
+                userForEdit.Id = user.Id;
+                userForEdit.Name = user.UserName;
+                userForEdit.Email = user.Email;
+            }
+
+            return PartialView("_UserEditPartial", userForEdit);
         }
 
-        // POST: AdminController/Edit/5
+        // POST: AdminController/EditUser/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> EditUser(UserEditModel editedUser)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                IdentityUser user = await _userManager.FindByIdAsync(editedUser?.Id);
+                user.Email = editedUser?.Email;
+                user.UserName = editedUser?.Name;
+
+                if (editedUser?.Password != null)
+                {
+                    PasswordHasher<IdentityUser> _hasher = new PasswordHasher<IdentityUser>();
+                    user.PasswordHash = _hasher.HashPassword(user, editedUser?.Password);
+                }
+
+                var result = await _userManager.UpdateAsync(user);
             }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction("IndexUsers");
         }
 
-        // GET: AdminController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: AdminController/DeleteUser/5
+        public async Task<IActionResult> DeleteUser(string id)
         {
-            return View();
+            IdentityUser user = await _userManager.FindByIdAsync(id);
+
+            var deletableUser = new UserEditModel();
+
+            if (user != null)
+            {
+                deletableUser.Id = user.Id;
+                deletableUser.Name = user.UserName;
+                return PartialView("_UserDeletePartial", deletableUser);
+            }
+
+            return RedirectToAction("IndexUsers");
         }
 
-        // POST: AdminController/Delete/5
+        // POST: AdminController/DeleteUser/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteUser(UserEditModel model)
         {
-            try
+            if (model?.Id != null)
             {
-                return RedirectToAction(nameof(Index));
+                IdentityUser user = await _userManager.FindByIdAsync(model.Id);
+                if (user != null)
+                {
+                    IdentityResult result = await _userManager.DeleteAsync(user);
+                }
             }
-            catch
+
+            return RedirectToAction("IndexUsers");
+        }
+
+        public IActionResult IndexRoles()
+        {
+            var roles = _roleManager.Roles;
+
+            return View(roles);
+        }
+
+        [HttpGet]
+        public IActionResult CreateRole()
+        {
+            var newRole = new IdentityRole();
+
+            return PartialView("_RoleCreatePartial", newRole);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateRole(IdentityRole role)
+        {
+            if (role != null)
             {
-                return View();
+                IdentityResult result = await _roleManager.CreateAsync(role);
             }
+
+            return RedirectToAction("IndexRoles");
         }
     }
 }

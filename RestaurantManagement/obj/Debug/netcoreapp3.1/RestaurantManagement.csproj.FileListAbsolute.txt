@@ -267,14 +267,11 @@ D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netco
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\RestaurantManagement.TagHelpers.output.cache
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\RestaurantManagement.RazorCoreGenerate.cache
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
-D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Index.cshtml.g.cs
-D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Admin\UserCreate.cshtml.g.cs
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Login\LoginIndex.cshtml.g.cs
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
-D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_UserCreatePartial.cshtml.g.cs
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
@@ -284,3 +281,8 @@ D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netco
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\RestaurantManagement.Views.pdb
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\RestaurantManagement.csproj.CopyComplete
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\RestaurantManagement.genruntimeconfig.cache
+D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_UserEditPartial.cshtml.g.cs
+D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_UserDeletePartial.cshtml.g.cs
+D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Admin\IndexUsers.cshtml.g.cs
+D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Admin\IndexRoles.cshtml.g.cs
+D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_RoleCreatePartial.cshtml.g.cs
