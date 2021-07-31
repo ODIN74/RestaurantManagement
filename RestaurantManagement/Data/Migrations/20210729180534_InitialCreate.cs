@@ -19,13 +19,13 @@ namespace RestaurantManagement.Data.Migrations
                 name: "FK_AspNetUserLogins_AspNetUsers_UserId",
                 table: "AspNetUserLogins");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                table: "AspNetUserRoles");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+            //    table: "AspNetUserRoles");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                table: "AspNetUserRoles");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+            //    table: "AspNetUserRoles");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_AspNetUserTokens_AspNetUsers_UserId",
@@ -47,13 +47,13 @@ namespace RestaurantManagement.Data.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers");
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_AspNetUserRoles",
-                table: "AspNetUserRoles");
+            //migrationBuilder.DropPrimaryKey(
+            //    name: "PK_AspNetUserRoles",
+            //    table: "AspNetUserRoles");
 
-            migrationBuilder.DropIndex(
-                name: "IX_AspNetUserRoles_RoleId",
-                table: "AspNetUserRoles");
+            //migrationBuilder.DropIndex(
+            //    name: "IX_AspNetUserRoles_RoleId",
+            //    table: "AspNetUserRoles");
 
             migrationBuilder.DropPrimaryKey(
                 name: "PK_AspNetUserLogins",

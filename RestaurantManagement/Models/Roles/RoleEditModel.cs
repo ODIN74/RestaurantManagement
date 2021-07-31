@@ -14,6 +14,9 @@ namespace RestaurantManagement.Models.Roles
         [Required]
         public string RoleName { get; set; }
 
-        public Dictionary<IdentityUser, bool> UsersInRoleStatus;
+        public string[] UsersForAdd { get; set; } = new string[0];
+
+        public Dictionary<IdentityUser, bool> UsersInRoleStatus { get; set; }
+
     }
 }

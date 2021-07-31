@@ -159,7 +159,7 @@ namespace RestaurantManagement.Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("RoleId");
+                    //b.HasKey("RoleId");
 
                     b.ToTable("UserRoles");
                 });

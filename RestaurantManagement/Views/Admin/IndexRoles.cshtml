@@ -1,7 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @model IEnumerable<IdentityRole>
 @{
-    Layout = "_Layout";
     ViewData["Title"] = "Управление ролями пользователей";
 }
 
@@ -19,7 +18,7 @@
             <table class="table align-items-center table-flush">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col" class="align-items-center" data-sort="id">ID</th>
+                        <th scope="col" class="align-items-center" data-sort="id">Номер</th>
                         <th scope="col" class="align-items-center" data-sort="name">Наименование роли</th>
                         <th scope="col" class="align-items-center" data-sort="email">Пользователи</th>
                         <th scope="col"></th>
@@ -32,12 +31,13 @@
                     }
                     else
                     {
-                        @foreach (IdentityRole role in Model)
+                        int counter = 1;
+                        foreach (IdentityRole role in Model)
                         {
                             <tr>
-                                <td class="text-white align-items-center">@role.Id</td>
+                                <td class="text-white align-items-center">@counter</td>
                                 <td class="text-white align-items-center">@role.Name</td>
-                                <td class="text-white align-items-center"></td>
+                                <td class="text-white align-items-center" role-users="@role.Id"></td>
                                 <td class="text-right">
                                     <div class="dropdown">
                                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -52,6 +52,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            counter++;
                         }
                     }
                 </tbody>

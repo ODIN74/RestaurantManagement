@@ -2,8 +2,7 @@
 @model RestaurantManagement.Models.Roles.RoleEditModel
 
 @{
-    Layout = "_Layout";
-    ViewData["Title"] = "Управление ролями пользователей";
+    ViewData["Title"] = "Редактирование роли пользователя";
 }
 
 <div class="card bg-default shadow">
@@ -11,7 +10,7 @@
         <h3 class="text-white mb-0">Роли пользователей</h3>
     </div>
     <div>
-        <form role="form" action="Edit" method="post">
+        <form role="form" method="post" asp-controller="Admin" asp-action="ModifyRole">
             <div class="form-group mb-3">
                 <input type="hidden" name="roleId" value="@Model.RoleId" />
                 <div class="input-group input-group-merge input-group-alternative">
@@ -25,26 +24,36 @@
             <div class="table-responsive">
                 <table class="table align-items-center table-flush">
                     <thead class="thead-dark">
-                    <tr>
-                        @*<th scope="col" class="align-items-center" data-sort="id">ID</th>*@
-                        <th scope="col" class="align-items-center" data-sort="name">Пользователь</th>
-                        <th scope="col" class="align-items-center" data-sort="email">Использовать роль</th>
-                    </tr>
+                        <tr>
+                            @*<th scope="col" class="align-items-center" data-sort="id">ID</th>*@
+                            <th scope="col" class="align-items-center" data-sort="name">Пользователь</th>
+                            <th scope="col" class="align-items-center" data-sort="email">Использовать роль</th>
+                        </tr>
                     </thead>
                     <tbody class="list">
-
                     @foreach (KeyValuePair<IdentityUser, bool> userInfo in Model.UsersInRoleStatus)
                     {
                         <tr>
-                            <td class="text-white align-items-center">@userInfo.Key.UserName</td>
-                            <td class="text-white align-items-center"><input type="checkbox" value="@userInfo.Value"/></td>
+                            <td class="text-white align-items-center">@userInfo.Key.UserName
+                            <td class="text-white align-items-center">
+                                @{
+                                    if (userInfo.Value)
+                                    {
+                                        <input type="checkbox" checked="checked" name="UsersForAdd" value="@userInfo.Key.Id" />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" name="UsersForAdd" value="@userInfo.Key.Id" />
+                                    }
+                                }
+                            </td>
                         </tr>
                     }
 
                     </tbody>
                 </table>
             </div>
-            <div class="card-footer py-4">
+            @*<div class="card-footer py-4">
                 <nav aria-label="...">
                     <ul class="pagination justify-content-end mb-0">
                         <li class="page-item disabled">
@@ -68,14 +77,14 @@
                         </li>
                     </ul>
                 </nav>
-            </div>
+            </div>*@
             <div class="card-header bg-transparent border-0">
-                <button type="submit" class="btn btn-outline-success" asp-action="EditRole">
+                <button type="submit" class="btn btn-outline-success">
                     <span class="btn-inner--text">Применить изменения</span>
                 </button>
-                <button type="button" class="btn btn-outline-success" asp-action="IndexRoles">
+                <a class="btn btn-outline-secondary" asp-action="IndexRoles">
                     <span class="btn-inner--text">Отмена</span>
-                </button>
+                </a>
             </div>
         </form>
     </div>

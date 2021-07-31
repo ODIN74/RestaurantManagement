@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using RestaurantManagement.Data.Users;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
@@ -45,6 +46,14 @@ namespace RestaurantManagement.Controllers
                 }
             }
             return View(model);
+        }
+
+        [Authorize] 
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("LoginIndex");
         }
     }
 }

@@ -4,14 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using RestaurantManagement.Data;
 using RestaurantManagement.Models.Roles;
 using RestaurantManagement.Models.Users;
 
 namespace RestaurantManagement.Controllers
 {
+    //[Authorize(Roles = "Администратор системы")]
     public class AdminController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -180,7 +183,7 @@ namespace RestaurantManagement.Controllers
                 foreach (IdentityUser user in _userManager.Users)
                 {
                     bool isInRole = await _userManager.IsInRoleAsync(user, role.NormalizedName);
-                    users.Add(user,isInRole);
+                    users.Add(user, isInRole);
                 }
 
                 var dataForEditing = new RoleEditModel()
@@ -195,5 +198,85 @@ namespace RestaurantManagement.Controllers
 
             return RedirectToAction("IndexRoles");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ModifyRole(RoleEditModel editedRole)
+        {
+            if (editedRole != null)
+            {
+                IdentityRole role = await _roleManager.FindByIdAsync(editedRole.RoleId);
+
+                if (role != null)
+                {
+                    IdentityResult result = await _roleManager.SetRoleNameAsync(role, editedRole.RoleName);
+                }
+
+                List<string> registeredUsers = new List<string>();
+                foreach (IdentityUser registeredUser in _userManager.Users)
+                {
+                    registeredUsers.Add(registeredUser.Id);
+                }
+
+                string[] registeredUsersArray = registeredUsers.ToArray();
+                var usersForRemove = registeredUsersArray.Except(editedRole.UsersForAdd);
+
+                foreach (string userId in usersForRemove)
+                {
+                    IdentityUser user = await _userManager.FindByIdAsync(userId);
+                    if (user != null)
+                    {
+                        bool isInRole = await _userManager.IsInRoleAsync(user, editedRole.RoleName);
+                        if (isInRole)
+                        {
+                            IdentityResult result = await _userManager.RemoveFromRoleAsync(user, editedRole.RoleName);
+                        }
+                    }
+                }
+
+                foreach (string userId in editedRole.UsersForAdd)
+                {
+                    IdentityUser user = await _userManager.FindByIdAsync(userId);
+                    if (user != null)
+                    {
+                        bool isInRole = await _userManager.IsInRoleAsync(user, editedRole.RoleName);
+                        if (!isInRole)
+                        {
+                            IdentityResult result = await _userManager.AddToRoleAsync(user, editedRole.RoleName);
+                        }
+                    }
+                }
+            }
+
+            return RedirectToAction("IndexRoles");
+        }
+
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            IdentityRole role = await _roleManager.FindByIdAsync(id);
+
+            if (role != null)
+            {
+                return PartialView("_RoleDeletePartial", role);
+            }
+
+            return RedirectToAction("IndexRoles");
+        }
+
+        // POST: AdminController/DeleteUser/5
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(IdentityRole model)
+        {
+            if (model?.Id != null)
+            {
+                IdentityRole role = await _roleManager.FindByIdAsync(model.Id);
+                if (role != null)
+                {
+                    IdentityResult result = await _roleManager.DeleteAsync(role);
+                }
+            }
+
+            return RedirectToAction("IndexRoles");
+        }
+
     }
 }
