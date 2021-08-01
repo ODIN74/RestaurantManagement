@@ -27,6 +27,8 @@ namespace RestaurantManagement.Data
 
         public DbSet<Order> Orders { get; set; }
 
+        public DbSet<MenuCategory> Categories { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<IngredientsWeights>().HasOne(d => d.Ingredient).WithMany();
@@ -44,6 +46,7 @@ namespace RestaurantManagement.Data
             modelBuilder.Entity<DishesInCatуgories>().HasOne(d => d.Dish);
             modelBuilder.Entity<DishesInCatуgories>().HasOne(c => c.Category);
             modelBuilder.Entity<IdentityUserRole<string>>(b => b.HasKey(i => new {i.UserId, i.RoleId}));
+            modelBuilder.Entity<MenuCategory>().HasKey(c => c.Id);
         }
     }
 }

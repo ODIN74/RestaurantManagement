@@ -1,59 +1,57 @@
-﻿@using Microsoft.AspNetCore.Identity
-@model IEnumerable<IdentityRole>
+﻿@using RestaurantManagement.Data
+@model IEnumerable<MenuCategory>
 @{
-    ViewData["Title"] = "Управление ролями пользователей";
+    ViewData["Title"] = "Управление категориями блюд";
 }
 
 <div class="card bg-default shadow">
     <div class="card-header bg-transparent border-0">
-        <h3 class="text-white mb-0">Роли пользователей</h3>
+        <h3 class="text-white mb-0">Категории блюд</h3>
     </div>
     <div>
         <div id="PlaceHolder"></div>
-        <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="ajax-modal" data-target="#roleCreate" data-url="@Url.Action("CreateRole")">
-            <span class="btn-inner--icon"><i class="ni ni-hat-3"></i></span>
-            <span class="btn-inner--text">Создать роль пользователя</span>
+        <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="ajax-modal" data-target="#categoryCreate" data-url="@Url.Action("Create")">
+            <span class="btn-inner--icon"><i class="ni ni-folder-17"></i></span>
+            <span class="btn-inner--text">Создать категорию</span>
         </button>
         <div class="table-responsive">
             <table class="table align-items-center table-flush">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col" class="align-items-center" data-sort="id">Номер</th>
-                        <th scope="col" class="align-items-center" data-sort="name">Наименование роли</th>
-                        <th scope="col" class="align-items-center" data-sort="email">Пользователи</th>
+                        <th scope="col" class="align-items-center" data-sort="number">Номер</th>
+                        <th scope="col" class="align-items-center" data-sort="name">Наименование категории</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody class="list">
                     @if (!Model.Any())
                     {
-                        <tr><td colspan="4" class="text-white align-items-center">Роли пользователей еще не созданы</td></tr>
+                        <tr><td colspan="4" class="text-white align-items-center">Категории еще не созданы</td></tr>
                     }
                     else
                     {
                         int counter = 1;
-                        foreach (IdentityRole role in Model)
+                        foreach (MenuCategory category in Model)
                         {
                             <tr>
                                 <td class="text-white align-items-center">@counter</td>
-                                <td class="text-white align-items-center">@role.Name</td>
-                                <td class="text-white align-items-center" role-users="@role.Id"></td>
+                                <td class="text-white align-items-center">@category.Name</td>
                                 <td class="text-right">
                                     <div class="dropdown">
                                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <form asp-action="EditRole" asp-route-id="@role.Id" method="post">
-                                                <button type="submit" class="btn btn-secondary btn-lg btn-block">Изменить</button>
-                                            </form>
-                                            <button type="button" class="btn btn-secondary btn-lg btn-block" data-toggle="ajax-modal" data-target="#roleDelete" data-url="@Url.Action($"DeleteRole/{role.Id}")">Удалить</button>
+                                            <button type="button" class="btn btn-secondary btn-lg btn-block" data-toggle="ajax-modal" data-target="#categoryEdit" data-url="@Url.Action($"Edit/{category.Id}")">Изменить</button>
+                                            <button type="button" class="btn btn-secondary btn-lg btn-block" data-toggle="ajax-modal" data-target="#categoryDelete" data-url="@Url.Action($"Delete/{category.Id}")">Удалить</button>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
+
                             counter++;
                         }
+
                     }
                 </tbody>
             </table>

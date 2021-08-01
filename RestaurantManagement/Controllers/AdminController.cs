@@ -141,6 +141,7 @@ namespace RestaurantManagement.Controllers
                 {
                     IdentityResult result = await _userManager.DeleteAsync(user);
                 }
+
             }
 
             return RedirectToAction("IndexUsers");

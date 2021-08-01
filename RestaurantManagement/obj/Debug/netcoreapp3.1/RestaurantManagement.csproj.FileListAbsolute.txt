@@ -292,3 +292,15 @@ C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcor
 C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_UserEditPartial.cshtml.g.cs
 C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_RoleDeletePartial.cshtml.g.cs
 C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Profile\ProfileIndex.cshtml.g.cs
+C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Ingredients\IngredientsIndex.cshtml.g.cs
+C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_IngredientCreatePartial.cshtml.g.cs
+C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_IngredientDeletePartial.cshtml.g.cs
+C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_IngredientEditPartial.cshtml.g.cs
+C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_TableCreatePartial.cshtml.g.cs
+C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_TableDeletePartial.cshtml.g.cs
+C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_TableEditPartial.cshtml.g.cs
+C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Tables\TablesIndex.cshtml.g.cs
+C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CategoryCreatePartial.cshtml.g.cs
+C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CategoryDeletePartial.cshtml.g.cs
+C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CategoryEditPartial.cshtml.g.cs
+C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Category\CategoriesIndex.cshtml.g.cs
