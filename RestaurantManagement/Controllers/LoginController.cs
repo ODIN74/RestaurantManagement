@@ -40,10 +40,10 @@ namespace RestaurantManagement.Controllers
                     SignInResult result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("ProfileIndex","Profile",new{@name=user.UserName});
                     }
-                    ModelState.AddModelError("Error", "Invalid user email or password");
                 }
+                ModelState.AddModelError("Error", "Invalid user email or password");
             }
             return View(model);
         }

@@ -23,14 +23,14 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            @Html.LabelFor(m => m.DishCategoryId, "Категория", new { @class = "form-control-label text-white", @name="DishCategoryId"})
-                            @Html.DropDownListFor(c => c.DishCategoryId, ViewBag.Categories as IEnumerable<SelectListItem>, new { @class="form-control", @name="DishCategoryName"})
+                            @Html.LabelFor(m => m.DishCategoryId, "Категория", new { @class = "form-control-label text-white", @name = "DishCategoryId" })
+                            @Html.DropDownListFor(c => c.DishCategoryId, ViewBag.Categories as IEnumerable<SelectListItem>, new { @class = "form-control", @name = "DishCategoryName" })
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <lable class="form-control-label text-white" for="isRequiresPreparation">Требуется приготовление</lable>
-                            <input id="isRequiresPreparation" class="checkbox-inline" asp-for="IsRequiresPreparation" value="@Model.IsRequiresPreparation" type="checkbox"/>
+                            <input id="isRequiresPreparation" class="checkbox-inline" asp-for="IsRequiresPreparation" value="@Model.IsRequiresPreparation" type="checkbox" />
                         </div>
                     </div>
                 </div>
@@ -67,13 +67,12 @@
                             int counter = 1;
                             foreach (int ingredientId in Model.DishIngredientsIds)
                             {
-                                Ingredients ingredientInfo = Model.Ingredients.Where(i => i.Id == ingredientId).First();
-                    <tr>
-                        <td class="text-white align-items-center">@counter</td>
-                        <td class="text-white align-items-center" name="DishIngredientsIds">@ingredientInfo.Name</td>
-                        <td class="text-white align-items-center" name="DishIngredientsWeights">@Model.DishIngredientsWeights[counter - 1]</td>
-                        <td class="text-white align-items-center">@ingredientInfo.UnitOfMeasurement</td>
-                    </tr>
+                                <tr>
+                                    <td class="text-white align-items-center">@counter</td>
+                                    <td class="text-white align-items-center">@Html.DropDownListFor(c => c.DishIngredientsIds, ViewBag.Ingredients as IEnumerable<SelectListItem>, new { @class = "form-control"})</td>
+                                    <td class="text-white align-items-center"><input class="form-control" asp-for="DishIngredientsWeights" value="@Model.DishIngredientsWeights[counter - 1]"/></td>
+                                    <td class="text-white align-items-center">@Html.DisplayFor(c => c.Ingredients.Where(m => m.Id == c.DishIngredientsIds[counter - 1]).FirstOrDefault().UnitOfMeasurement)</td>
+                                </tr>
                                 counter++;
                             }
                         }

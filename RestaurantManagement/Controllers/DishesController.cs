@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.UI.V3.Pages.Internal.Account;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using RestaurantManagement.Data;
 using RestaurantManagement.Models.Dishes;
 
@@ -53,16 +54,17 @@ namespace RestaurantManagement.Controllers
         {
             var model = new DishCreateModel();
             List<MenuCategory> categories = _context.Categories.ToList();
-            List<MenuCategory> ingredients = _context.Categories.ToList();
-            ViewBag.Categories = new SelectList(categories, "DishCategoryId", "DishCategoryName");
-            ViewBag.Ingredients = new SelectList(ingredients, "DishIngredientsIds", "DishIngredientsName");
+            List<Ingredients> ingredients = _context.Ingredients.ToList();
+            ViewBag.Categories = new SelectList(categories, "Id", "Name");
+            ViewBag.Ingredients = new SelectList(ingredients, "Id", "Name");
             return View(model);
         }
 
-        public IActionResult DishCreate(DishCreateModel model)
+        public IActionResult DishCreateWithIngredients(DishCreateModel model)
         {
             List<MenuCategory> categories = _context.Categories.ToList();
-            List<MenuCategory> ingredients = _context.Categories.ToList();
+            List<Ingredients> ingredients = _context.Ingredients.ToList();
+            model.Ingredients = _context.Ingredients.ToList();
             ViewBag.Categories = new SelectList(categories, "Id", "Name");
             ViewBag.Ingredients = new SelectList(ingredients, "Id", "Name");
             return View(model);
@@ -76,15 +78,15 @@ namespace RestaurantManagement.Controllers
             {
                 int[] tempArrayForIds = model.DishIngredientsIds;
                 Array.Resize<int>(ref tempArrayForIds, tempArrayForIds.Length + 1);
-                tempArrayForIds[tempArrayForIds.Length - 1] = -1;
+                tempArrayForIds[^1] = _context.Ingredients.First().Id;
                 model.DishIngredientsIds = tempArrayForIds;
 
                 string[] tempArrayForWeights = model.DishIngredientsWeights;
                 Array.Resize<string>(ref tempArrayForWeights, tempArrayForWeights.Length + 1);
-                tempArrayForWeights[tempArrayForWeights.Length - 1] = String.Empty;
+                tempArrayForWeights[^1] = "0";
                 model.DishIngredientsWeights = tempArrayForWeights;
 
-                return RedirectToAction("DishCreate", model); 
+                return RedirectToAction("DishCreateWithIngredients", model); 
             }
             return RedirectToAction("DishCreate");
         }

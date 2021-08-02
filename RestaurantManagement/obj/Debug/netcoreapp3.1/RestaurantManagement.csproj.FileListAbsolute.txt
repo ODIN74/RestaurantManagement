@@ -320,3 +320,6 @@ D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netco
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Tables\TablesIndex.cshtml.g.cs
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Dishes\DishesIndex.cshtml.g.cs
 D:\_New_Docs\Anton\ASP\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Dishes\DishCreate.cshtml.g.cs
+C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Dishes\DishCreate.cshtml.g.cs
+C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Dishes\DishesIndex.cshtml.g.cs
+C:\Anton\CS programms\RestaurantManagement\RestaurantManagement\obj\Debug\netcoreapp3.1\Razor\Views\Dishes\DishCreateWithIngredients.cshtml.g.cs

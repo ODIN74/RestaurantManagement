@@ -25,7 +25,7 @@ namespace RestaurantManagement.Controllers
         // GET: ProfileController
         public async Task<IActionResult> ProfileIndex(string name)
         {
-            IdentityUser user = await _userManager.FindByNameAsync(name);
+            IdentityUser user = await _userManager.FindByNameAsync(name.ToUpper());
             AdditionalUserInformation info = new AdditionalUserInformation();
             UserProfileEditModel infoModel = new UserProfileEditModel();
             if (user != null)
