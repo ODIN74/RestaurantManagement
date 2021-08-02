@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ASP;
 using Microsoft.AspNetCore.Identity.UI.V3.Pages.Internal.Account;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using RestaurantManagement.Data;
+using RestaurantManagement.Models.Dishes;
 
 namespace RestaurantManagement.Controllers
 {
@@ -22,9 +24,21 @@ namespace RestaurantManagement.Controllers
         // GET: DishesController
         public IActionResult DishesIndex()
         {
-            IEnumerable<Dishes> dishes = _context.Dishes;
-            IEnumerable<MenuCategory> categories = _context.Categories;
-            return View(dishes, categories);
+            IEnumerable<DishesInCategories> dishesInCategories = _context.DishesInCategories;
+
+            List<MenuCategory> categories = _context.Categories.ToList();
+            categories.Sort();
+
+            List<Dishes> dishes = _context.Dishes.ToList();
+
+            var dataForView = new DishesViewModel()
+            {
+                CategoriesList = categories,
+                DishesInCategories = dishesInCategories,
+                DishesList = dishes
+            };
+
+            return View(dataForView);
         }
 
         // GET: DishesController/Details/5
@@ -33,30 +47,57 @@ namespace RestaurantManagement.Controllers
             return View();
         }
 
-        // GET: DishesController/Create
-        public ActionResult DishCreate()
+        [HttpGet]
+        // GET: DishesController/DishCreate
+        public IActionResult DishCreate()
         {
-            var newDish = new Dishes();
-            MenuCategory categories = 
+            var model = new DishCreateModel();
+            List<MenuCategory> categories = _context.Categories.ToList();
+            List<MenuCategory> ingredients = _context.Categories.ToList();
+            ViewBag.Categories = new SelectList(categories, "DishCategoryId", "DishCategoryName");
+            ViewBag.Ingredients = new SelectList(ingredients, "DishIngredientsIds", "DishIngredientsName");
+            return View(model);
+        }
 
+        public IActionResult DishCreate(DishCreateModel model)
+        {
+            List<MenuCategory> categories = _context.Categories.ToList();
+            List<MenuCategory> ingredients = _context.Categories.ToList();
+            ViewBag.Categories = new SelectList(categories, "Id", "Name");
+            ViewBag.Ingredients = new SelectList(ingredients, "Id", "Name");
+            return View(model);
+        }
 
+        // POST: DishesController/DishCreate
+        [HttpPost]
+        public IActionResult DishCreateHelper(DishCreateModel model)
+        {
+            if (model != null)
+            {
+                int[] tempArrayForIds = model.DishIngredientsIds;
+                Array.Resize<int>(ref tempArrayForIds, tempArrayForIds.Length + 1);
+                tempArrayForIds[tempArrayForIds.Length - 1] = -1;
+                model.DishIngredientsIds = tempArrayForIds;
 
+                string[] tempArrayForWeights = model.DishIngredientsWeights;
+                Array.Resize<string>(ref tempArrayForWeights, tempArrayForWeights.Length + 1);
+                tempArrayForWeights[tempArrayForWeights.Length - 1] = String.Empty;
+                model.DishIngredientsWeights = tempArrayForWeights;
+
+                return RedirectToAction("DishCreate", model); 
+            }
+            return RedirectToAction("DishCreate");
+        }
+
+        public IActionResult AddIngredientToDish()
+        {
             return View();
         }
 
-        // POST: DishesController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [HttpGet]
+        public IActionResult AddCategoryToDish(DishCreateModel model)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return PartialView("_CategorySelectorPartial");
         }
 
         // GET: DishesController/Edit/5

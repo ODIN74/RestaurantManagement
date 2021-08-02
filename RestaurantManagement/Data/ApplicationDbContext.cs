@@ -21,6 +21,8 @@ namespace RestaurantManagement.Data
 
         public DbSet<DishesInPreparation> DishesInPreparations { get; set; }
 
+        public DbSet<DishesInCategories> DishesInCategories { get; set; }
+
         public DbSet<Tables> Tables { get; set; }
 
         public DbSet<Price> Price { get; set; }
@@ -43,8 +45,8 @@ namespace RestaurantManagement.Data
             modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(l => l.UserId);
             modelBuilder.Entity<IdentityUserRole<string>>().HasKey(r => r.RoleId);
             modelBuilder.Entity<IdentityUserToken<string>>().HasKey(t => t.UserId);
-            modelBuilder.Entity<DishesInCatуgories>().HasOne(d => d.Dish);
-            modelBuilder.Entity<DishesInCatуgories>().HasOne(c => c.Category);
+            modelBuilder.Entity<DishesInCategories>().HasOne(d => d.Dish);
+            modelBuilder.Entity<DishesInCategories>().HasOne(c => c.Category);
             modelBuilder.Entity<IdentityUserRole<string>>(b => b.HasKey(i => new {i.UserId, i.RoleId}));
             modelBuilder.Entity<MenuCategory>().HasKey(c => c.Id);
         }

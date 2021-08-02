@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantManagement.Data
 {
-    public class DishesInCatуgories
+    public class DishesInCategories
     {
         public int Id { get; set; }
 

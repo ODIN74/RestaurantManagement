@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Anton\\CS programms\\RestaurantManagement\\RestaurantManagement\\RestaurantManagement.csproj": {}
+    "D:\\_New_Docs\\Anton\\ASP\\RestaurantManagement\\RestaurantManagement\\RestaurantManagement.csproj": {}
   },
   "projects": {
-    "C:\\Anton\\CS programms\\RestaurantManagement\\RestaurantManagement\\RestaurantManagement.csproj": {
+    "D:\\_New_Docs\\Anton\\ASP\\RestaurantManagement\\RestaurantManagement\\RestaurantManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Anton\\CS programms\\RestaurantManagement\\RestaurantManagement\\RestaurantManagement.csproj",
+        "projectUniqueName": "D:\\_New_Docs\\Anton\\ASP\\RestaurantManagement\\RestaurantManagement\\RestaurantManagement.csproj",
         "projectName": "RestaurantManagement",
-        "projectPath": "C:\\Anton\\CS programms\\RestaurantManagement\\RestaurantManagement\\RestaurantManagement.csproj",
-        "packagesPath": "C:\\Users\\Антон\\.nuget\\packages\\",
-        "outputPath": "C:\\Anton\\CS programms\\RestaurantManagement\\RestaurantManagement\\obj\\",
+        "projectPath": "D:\\_New_Docs\\Anton\\ASP\\RestaurantManagement\\RestaurantManagement\\RestaurantManagement.csproj",
+        "packagesPath": "C:\\Users\\klyushin_a.1OBL\\.nuget\\packages\\",
+        "outputPath": "D:\\_New_Docs\\Anton\\ASP\\RestaurantManagement\\RestaurantManagement\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Антон\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\klyushin_a.1OBL\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -82,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

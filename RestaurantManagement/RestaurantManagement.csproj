@@ -110,8 +110,4 @@
     <None Include="wwwroot\vendor\gulp-copy\node_modules\yargs\yargs.js" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Dishes\" />
-  </ItemGroup>
-
 </Project>

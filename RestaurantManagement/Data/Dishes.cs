@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Security.Policy;
 using System.Threading.Tasks;
 
 namespace RestaurantManagement.Data
 {
-    public class Dishes
+    public class Dishes : IComparable<Dishes>
     {
         public int Id { get; set; }
 
@@ -21,5 +22,11 @@ namespace RestaurantManagement.Data
         public int CookingTimeInMinutes { get; set; }
 
         public bool IsAgreed { get; set; } = false;
+
+        public int CompareTo(Dishes other)
+        {
+            if (other == null) return 1;
+            return this.Name.CompareTo(other.Name);
+        }
     }
 }

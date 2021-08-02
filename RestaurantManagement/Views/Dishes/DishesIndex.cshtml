@@ -1,0 +1,108 @@
+﻿@using RestaurantManagement.Data
+
+@model RestaurantManagement.Data.DishesViewModel
+@{
+    ViewData["Title"] = "Меню ресторана";
+}
+
+<div class="card bg-default shadow">
+    <div class="card-header bg-transparent border-0">
+        <h3 class="text-white mb-0">Меню</h3>
+    </div>
+    <div>
+        <div id="PlaceHolder"></div>
+        <form asp-action="DishCreate" method="get">
+            <button type="submit" class="btn btn-success btn-lg btn-block" >
+                <span class="btn-inner--icon"><i class="ni ni-single-02"></i></span>
+                <span class="btn-inner--text">Создать блюдо</span>
+            </button>
+        </form>
+        <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+                <thead class="thead-dark">
+                <tr>
+                    <th colspan="4" class="align-items-center" data-sort="category">Категория</th>
+                    </tr>
+                <tr>
+                    <th scope="col" class="align-items-center" data-sort="number">Номер</th>
+                    <th scope="col" class="align-items-center" data-sort="name">Наименование</th>
+                    <th scope="col" class="align-items-center">Требует приготоволения</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody class="list">
+                    @if (!Model.DishesList.Any())
+                    {
+                        <tr><td colspan="4" class="text-white align-items-center">Блюда еще не созданы</td></tr>
+                    }
+                    else
+                    {
+
+                        foreach (MenuCategory category in Model.CategoriesList)
+                        {
+                            IEnumerable<DishesInCategories> dishesInCategory = Model.DishesInCategories.Where(c => c.Category.Id == category.Id);
+                            if (dishesInCategory.Any())
+                            {
+                                <tr><td colspan="3" class="text-white align-items-center">@category.Name</td></tr>
+                                int counter = 1;
+                                foreach (DishesInCategories dish in dishesInCategory)
+                                {
+                                    var currentDish = Model.DishesList.Where(c => c.Id == dish.Dish.Id).FirstOrDefault();
+                                    if(currentDish != null)
+                                    {
+                                        string isRequiresPreparation = currentDish.IsRequiresPreparation ? "Да" : "Нет";
+                                        <tr>
+                                            <td class="text-white align-items-center">@counter</td>
+                                            <td class="text-white align-items-center">@currentDish.Name</td>
+                                            <td class="text-white align-items-center">@isRequiresPreparation</td>
+                                            <td class="text-right">
+                                                <div class="dropdown">
+                                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data -toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                        <form asp-action="Edit" asp-route-id="@currentDish.Id" method="post">
+                                                            <button type="submit" class="btn btn-secondary btn-lg btn-block">Изменить</button>
+                                                        </form>
+                                                        <button type="button" class="btn btn-secondary btn-lg btn-block" data-toggle="ajax-modal" data-target="#dishDelete" data-url="@Url.Action($"Delete/{currentDish.Id}")">Удалить</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        counter++;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer py-4">
+            <nav aria-label="...">
+                <ul class="pagination justify-content-end mb-0">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">
+                            <i class="fas fa-angle-left"></i>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">
+                            <i class="fas fa-angle-right"></i>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

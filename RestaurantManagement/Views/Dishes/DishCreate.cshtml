@@ -1,0 +1,93 @@
+﻿@using RestaurantManagement.Data
+
+@model RestaurantManagement.Models.Dishes.DishCreateModel
+
+@{
+    ViewData["Title"] = "Создание нового блюда";
+}
+
+<div class="card bg-default shadow">
+    <div class="card-header bg-transparent border-0">
+        <h3 class="text-white mb-0">Создание нового блюда</h3>
+    </div>
+    <div>
+        <form role="form" method="post" asp-controller="Dishes" asp-action="DishCreateHelper" id="dishForm">
+            <div class="pl-lg-4">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="form-control-label text-white" for="dishName">Наименование</label>
+                            <input id="dishName" asp-for="Name" class="form-control" placeholder="Наименование блюда" type="text">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.DishCategoryId, "Категория", new { @class = "form-control-label text-white" })
+                            @Html.DropDownListFor(c => c.DishCategoryId, ViewBag.Categories as IEnumerable<SelectListItem>, new { @class="form-control", @placeholder="Наименование блюда"})
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <lable class="form-control-label text-white" for="isRequiresPreparation">Требуется приготовление</lable>
+                            <input id="isRequiresPreparation" class="checkbox-inline" asp-for="IsRequiresPreparation" value="@Model.IsRequiresPreparation" type="checkbox"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-3">
+                        <lable class="form-control-label text-white" for="dishCookingTimeInMinutes">Время приготовления</lable>
+                        <input id="dishCookingTimeInMinutes" class="form-control" asp-for="DishCookingTimeInMinutes" value="@Model.DishCookingTimeInMinutes" placeholder="Время приготовления в минутах" type="text" />
+                    </div>
+                </div>
+            </div>
+            <div id="PlaceHolder"></div>
+            <button type="submit" form="dishForm" class="btn btn-success btn-lg btn-block">
+                <span class="btn-inner--icon"><i class="ni ni-hat-3"></i></span>
+                <span class="btn-inner--text">Добавить ингредиент</span>
+            </button>
+            <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" class="align-items-center" data-sort="number">Номер</th>
+                            <th scope="col" class="align-items-center" data-sort="name">Ингредиент</th>
+                            <th scope="col" class="align-items-center" data-sort="email">Вес</th>
+                            <th scope="col" class="align-items-center" data-sort="email">Единица измерения</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="list">
+                        @{
+                            if (!Model.DishIngredientsIds.Any())
+                            {
+                                <tr><td colspan="4" class="text-white align-items-center">Добавьте ингредиенты</td></tr>
+                            }
+
+                            int counter = 1;
+                            foreach (int ingredientId in Model.DishIngredientsIds)
+                            {
+                                Ingredients ingredientInfo = Model.Ingredients.Where(i => i.Id == ingredientId).FirstOrDefault();
+                                <tr>
+                                    <td class="text-white align-items-center" name="DishIngredientsIds">@ingredientInfo.Name</td>
+                                    <td class="text-white align-items-center" name="DishIngredientsWeights">@Model.DishIngredientsWeights[counter - 1]</td>
+                                    <td class="text-white align-items-center">@ingredientInfo.UnitOfMeasurement</td>
+                                </tr>
+                                counter++;
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-header bg-transparent border-0">
+                <button type="submit" class="btn btn-outline-success" form="dishForm">
+                    <span class="btn-inner--text">Создать</span>
+                </button>
+                <a class="btn btn-outline-secondary" asp-action="DishesIndex">
+                    <span class="btn-inner--text">Отмена</span>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

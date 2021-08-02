@@ -209,7 +209,11 @@ namespace RestaurantManagement.Controllers
 
                 if (role != null)
                 {
-                    IdentityResult result = await _roleManager.SetRoleNameAsync(role, editedRole.RoleName);
+                    if (role.Name != editedRole.RoleName)
+                    {
+                        role.Name = editedRole.RoleName;
+                        IdentityResult result = await _roleManager.UpdateAsync(role);
+                    }
                 }
 
                 List<string> registeredUsers = new List<string>();
@@ -226,10 +230,10 @@ namespace RestaurantManagement.Controllers
                     IdentityUser user = await _userManager.FindByIdAsync(userId);
                     if (user != null)
                     {
-                        bool isInRole = await _userManager.IsInRoleAsync(user, editedRole.RoleName);
+                        bool isInRole = await _userManager.IsInRoleAsync(user, role.NormalizedName);
                         if (isInRole)
                         {
-                            IdentityResult result = await _userManager.RemoveFromRoleAsync(user, editedRole.RoleName);
+                            IdentityResult result = await _userManager.RemoveFromRoleAsync(user, role.NormalizedName);
                         }
                     }
                 }
@@ -239,10 +243,10 @@ namespace RestaurantManagement.Controllers
                     IdentityUser user = await _userManager.FindByIdAsync(userId);
                     if (user != null)
                     {
-                        bool isInRole = await _userManager.IsInRoleAsync(user, editedRole.RoleName);
+                        bool isInRole = await _userManager.IsInRoleAsync(user, role.NormalizedName);
                         if (!isInRole)
                         {
-                            IdentityResult result = await _userManager.AddToRoleAsync(user, editedRole.RoleName);
+                            IdentityResult result = await _userManager.AddToRoleAsync(user, role.NormalizedName);
                         }
                     }
                 }

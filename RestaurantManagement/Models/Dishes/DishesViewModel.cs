@@ -10,5 +10,7 @@ namespace RestaurantManagement.Data
         public List<Dishes> DishesList { get; set; }
 
         public List<MenuCategory> CategoriesList { get; set; }
+
+        public IEnumerable<DishesInCategories> DishesInCategories { get; set; }
     }
 }
