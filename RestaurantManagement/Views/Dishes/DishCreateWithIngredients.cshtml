@@ -69,7 +69,21 @@
                             {
                                 <tr>
                                     <td class="text-white align-items-center">@counter</td>
-                                    <td class="text-white align-items-center">@Html.DropDownListFor(c => c.DishIngredientsIds, ViewBag.Ingredients as IEnumerable<SelectListItem>, new { @class = "form-control"})</td>
+                                    <td class="text-white align-items-center">
+                                        <select id="DishIngredientsIds[@counter-1]" class="form-control" name="DishIngredientsIds" value="@Model.DishIngredientsIds[counter - 1]">
+                                            @foreach (SelectListItem item in ViewBag.Ingredients as IEnumerable<SelectListItem>)
+                                            {
+                                                if (Model.DishIngredientsIds[counter - 1] == int.Parse(item.Value))
+                                                {
+                                                    <option selected="selected" value="@item.Value">@item.Text</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Value">@item.Text</option>
+                                                }
+                                            }
+                                        </select>
+                                    </td>
                                     <td class="text-white align-items-center"><input class="form-control" asp-for="DishIngredientsWeights" value="@Model.DishIngredientsWeights[counter - 1]"/></td>
                                     <td class="text-white align-items-center">@Html.DisplayFor(c => c.Ingredients.Where(m => m.Id == c.DishIngredientsIds[counter - 1]).FirstOrDefault().UnitOfMeasurement)</td>
                                 </tr>

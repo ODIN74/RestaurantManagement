@@ -31,6 +31,8 @@ namespace RestaurantManagement.Data
 
         public DbSet<MenuCategory> Categories { get; set; }
 
+        public DbSet<IngredientsWeights> IngredientsWeights { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<IngredientsWeights>().HasOne(d => d.Ingredient).WithMany();

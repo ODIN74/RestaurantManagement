@@ -60,6 +60,52 @@ namespace RestaurantManagement.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [Route("/Dishes/DishWrite", Name = "DishWrite")]
+        public async Task<IActionResult> DishWrite(DishCreateModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Dishes newDish = new Dishes()
+                {
+                    Name = model.Name,
+                    CookingTimeInMinutes = int.Parse(model.DishCookingTimeInMinutes),
+                    IsAgreed = false,
+                    IsRequiresPreparation = model.IsRequiresPreparation,
+                };
+                await _context.Dishes.AddAsync(newDish);
+                await _context.SaveChangesAsync();
+
+                MenuCategory category = await _context.Categories.FindAsync(model.DishCategoryId);
+
+                if (category != null)
+                {
+                    await _context.DishesInCategories.AddAsync(new DishesInCategories()
+                    {
+                        Category = category,
+                        Dish = newDish
+                    });
+                    await _context.SaveChangesAsync();
+                }
+
+                for (int i = 0; i < model.DishIngredientsIds.Length; i++)
+                {
+                    Ingredients currentIngredient = await _context.Ingredients.FindAsync(model.DishIngredientsIds[i]);
+                    if (currentIngredient != null)
+                    {
+                        await _context.IngredientsWeights.AddAsync(new IngredientsWeights()
+                        {
+                            Ingredient = currentIngredient,
+                            Dish = newDish,
+                            Weight = float.Parse(model.DishIngredientsWeights[i])
+                        });
+                        await _context.SaveChangesAsync();
+                    }
+                }
+            }
+            return RedirectToAction("DishesIndex");
+        }
+
         public IActionResult DishCreateWithIngredients(DishCreateModel model)
         {
             List<MenuCategory> categories = _context.Categories.ToList();
@@ -78,7 +124,7 @@ namespace RestaurantManagement.Controllers
             {
                 int[] tempArrayForIds = model.DishIngredientsIds;
                 Array.Resize<int>(ref tempArrayForIds, tempArrayForIds.Length + 1);
-                tempArrayForIds[^1] = _context.Ingredients.First().Id;
+                tempArrayForIds[^1] = _context.Ingredients.FirstOrDefault().Id;
                 model.DishIngredientsIds = tempArrayForIds;
 
                 string[] tempArrayForWeights = model.DishIngredientsWeights;

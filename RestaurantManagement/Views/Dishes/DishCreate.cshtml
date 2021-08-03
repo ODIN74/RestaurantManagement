@@ -11,7 +11,7 @@
         <h3 class="text-white mb-0">Создание нового блюда</h3>
     </div>
     <div>
-        <form role="form" method="post" asp-controller="Dishes" asp-action="DishCreateHelper" id="dishForm">
+        <form role="form" method="post" id="dishForm">
             <div class="pl-lg-4">
                 <div class="row">
                     <div class="col-lg-4">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div id="PlaceHolder"></div>
-            <button type="submit" form="dishForm" class="btn btn-success btn-lg btn-block">
+            <button type="submit" form="dishForm" asp-action="DishCreateHelper" class="btn btn-success btn-lg btn-block">
                 <span class="btn-inner--icon"><i class="ni ni-hat-3"></i></span>
                 <span class="btn-inner--text">Добавить ингредиент</span>
             </button>
@@ -82,7 +82,7 @@
                 </table>
             </div>
             <div class="card-header bg-transparent border-0">
-                <button type="submit" class="btn btn-outline-success" form="dishForm">
+                <button type="submit" class="btn btn-outline-success" form="dishForm" asp-route="DishWrite">
                     <span class="btn-inner--text">Создать</span>
                 </button>
                 <a class="btn btn-outline-secondary" asp-action="DishesIndex">
