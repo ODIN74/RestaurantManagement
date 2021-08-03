@@ -99,7 +99,7 @@ namespace RestaurantManagement.Controllers
                     }
                 }
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("DishesIndex","Dishes");
         }
     }
 }

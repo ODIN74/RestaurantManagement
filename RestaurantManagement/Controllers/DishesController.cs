@@ -22,7 +22,6 @@ namespace RestaurantManagement.Controllers
             _context = context;
         }
 
-        // GET: DishesController
         public IActionResult DishesIndex()
         {
             IEnumerable<DishesInCategories> dishesInCategories = _context.DishesInCategories;
@@ -42,14 +41,8 @@ namespace RestaurantManagement.Controllers
             return View(dataForView);
         }
 
-        // GET: DishesController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         [HttpGet]
-        // GET: DishesController/DishCreate
         public IActionResult DishCreate()
         {
             var model = new DishCreateModel();
@@ -61,7 +54,6 @@ namespace RestaurantManagement.Controllers
         }
 
         [HttpPost]
-        [Route("/Dishes/DishWrite", Name = "DishWrite")]
         public async Task<IActionResult> DishWrite(DishCreateModel model)
         {
             if (ModelState.IsValid)
@@ -135,59 +127,6 @@ namespace RestaurantManagement.Controllers
                 return RedirectToAction("DishCreateWithIngredients", model); 
             }
             return RedirectToAction("DishCreate");
-        }
-
-        public IActionResult AddIngredientToDish()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult AddCategoryToDish(DishCreateModel model)
-        {
-            return PartialView("_CategorySelectorPartial");
-        }
-
-        // GET: DishesController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: DishesController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: DishesController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: DishesController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

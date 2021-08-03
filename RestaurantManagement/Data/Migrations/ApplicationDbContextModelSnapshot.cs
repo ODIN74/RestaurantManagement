@@ -260,7 +260,7 @@ namespace RestaurantManagement.Data.Migrations
                     b.ToTable("Dishes");
                 });
 
-            modelBuilder.Entity("RestaurantManagement.Data.DishesInCatуgories", b =>
+            modelBuilder.Entity("RestaurantManagement.Data.DishesInCategories", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -279,7 +279,7 @@ namespace RestaurantManagement.Data.Migrations
 
                     b.HasIndex("DishId");
 
-                    b.ToTable("DishesInCatуgories");
+                    b.ToTable("DishesInCategories");
                 });
 
             modelBuilder.Entity("RestaurantManagement.Data.DishesInPreparation", b =>
@@ -463,7 +463,7 @@ namespace RestaurantManagement.Data.Migrations
                         .HasForeignKey("OrderId");
                 });
 
-            modelBuilder.Entity("RestaurantManagement.Data.DishesInCatуgories", b =>
+            modelBuilder.Entity("RestaurantManagement.Data.DishesInCategories", b =>
                 {
                     b.HasOne("RestaurantManagement.Data.MenuCategory", "Category")
                         .WithMany()
